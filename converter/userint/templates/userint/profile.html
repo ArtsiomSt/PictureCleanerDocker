@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block title %}
+{{ title }}
+{% endblock %}
+
+{% block content %}
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col"></th>
+      <th scope="col"></th>
+    </tr>
+  </thead>
+    {% for stat, value in user_data.items %}
+  <tbody>
+    {% if stat == 'Password' %}
+    <tr>
+      <td scope="col">{{ stat }}</td>
+      <td scope="col">{{ value }} &nbsp;&nbsp;&nbsp;&nbsp; <a href="/profile/?chps=true">Change Password</a></td>
+    </tr>
+    {% else %}
+    <tr>
+      <td scope="col">{{ stat }}</td>
+      <td scope="col">{{ value }}</td>
+    </tr>
+    {% endif %}
+  </tbody>
+    {% endfor %}
+</table>
+{% if form %}
+<form action="" method="post">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <button type="submit">Save Password</button>
+</form>
+{% endif %}
+<hr>
+<a href="{% url 'changep' %}"><button>Change Profile Data</button></a>
+{% endblock %}

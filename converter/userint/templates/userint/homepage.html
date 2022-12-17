@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block title %}
+{{ title }}
+{% endblock %}
+
+
+{% block content %}
+{% if form %}
+<form action="" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Recognise</button>
+</form>
+{% endif %}
+{% if current_picture %}
+<img src="{{ current_picture.picture_file.url }}" alt="">
+<hr>
+{% if current_picture.cleaned_opencv_image %}
+<h2>OpenCV cleaning</h2>
+<img src="{{ current_picture.cleaned_opencv_image.url }}" alt="">
+<a href="{% url 'download' opencvimage_code %}"><button>Download image</button></a>
+<hr>
+{% endif %}
+{% if current_picture.autoencoded_image %}
+<h2>Autoencoder</h2>
+<img src="{{ current_picture.autoencoded_image.url }}" alt="">
+<a href="{% url 'download' autoencoded_code %}"><button>Download image</button></a>
+<hr>
+{% endif %}
+<p>{{ current_picture.recognised_text }}</p>
+{% endif %}
+{% endblock  %}
