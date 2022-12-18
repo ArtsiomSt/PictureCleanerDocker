@@ -11,8 +11,11 @@ from .models import UserProfile, PictureForRecongition
 import requests
 from converter.settings import BASE_DIR, MEDIA_ROOT
 import base64
-import cv2
+import logging
 import io
+
+
+logger = logging.getLogger('main')
 
 
 class HomePageView(LoginRequiredRedirectMixin, View):
@@ -27,8 +30,10 @@ class HomePageView(LoginRequiredRedirectMixin, View):
     def post(self, request):
         form = AddPictureForRecogintionForm(request.POST, request.FILES)
         if form.is_valid():
+            current_user = UserProfile.objects.select_related().get(user=request.user)
+            logger.info(f"{current_user.user.username}(pk = {current_user.pk}) has made a request for picture scanning")
             current_picture = PictureForRecongition.objects.create(
-                made_by_user=UserProfile.objects.get(user=request.user),
+                made_by_user=current_user,
                 picture_file=form.cleaned_data['picture_file'])
 
             media = current_picture.picture_file.url[1:]
@@ -36,8 +41,13 @@ class HomePageView(LoginRequiredRedirectMixin, View):
             payload = {}
             files = [('image', ('recognise.png', open(media, 'rb'), 'image/png'))]
             headers = {}
-            resp = requests.request("POST", url, headers=headers, data=payload, files=files)
-
+            try:
+                resp = requests.request("POST", url, headers=headers, data=payload, files=files)
+            except:
+                logger.error(f"Error while sending request for scanner api")
+                current_picture.picture_file.delete(save=False)
+                current_picture.delete()
+                return redirect('/?message=scanerror')
             image_code = resp.json().get('new_img', None)
             cleaned_image_opencv = resp.json().get('cleaned_img', None)
             text_from_picture = resp.json().get('letters', None)
@@ -71,6 +81,7 @@ class HomePageView(LoginRequiredRedirectMixin, View):
                 current_picture.autoencoded_image = autoencoded_image_file
 
             current_picture.save()
+            logger.info(f"{current_user.user.username}(pk = {current_user.pk}) has successfully received a response")
             context = {
                 'title': 'Homepage',
                 'current_picture': current_picture,
@@ -78,14 +89,19 @@ class HomePageView(LoginRequiredRedirectMixin, View):
                 'autoencoded_code': f'{current_picture.pk}_img_ca',
             }
             return render(request, 'userint/homepage.html', context=context)
-        return redirect('/?Error')
+        return redirect('/?message=Error')
 
 
 class LoginView(View):
     def get(self, request):
+        message = ''
+        if 'message' in request.GET:
+            if request.GET['message'] == 'InvalidData':
+                message = "Could not sing in with those credentials"
         form = LoginForm()
         context = {
             'form': form,
+            'message': message,
         }
         return render(request, 'userint/login.html', context)
 
@@ -96,17 +112,23 @@ class LoginView(View):
             user = authenticate(username=cleaned_data['username'], password=cleaned_data['password'])
             try:
                 login(request, user)
+                logger.info(f"user {cleaned_data['username']} logged in succesfully")
                 return redirect('home')
             except:
-                pass
+                logger.info(f"user {cleaned_data['username']} access denied")
         return redirect('/signin/?message=InvalidData')
 
 
 class RegisterView(View):
     def get(self, request):
+        message = ''
+        if 'message' in request.GET:
+            if request.GET['message'] == 'InvalidData':
+                message = "Could not sing up with those credentials"
         form = RegisterForm()
         context = {
             'form': form,
+            'message': message,
         }
         return render(request, 'userint/registration.html', context)
 
@@ -115,12 +137,15 @@ class RegisterView(View):
         if form.is_valid():
             user = form.save()
             UserProfile.objects.create(user=user)
+            logger.info(f"created new user {user.username}(pk = {user.pk})")
             return redirect('/signin/?message=Success')
-        return redirect('/signup/?message=Invaliddata')
+        return redirect('/signup/?message=InvalidData')
 
 
 def logout_user(request):
     if request.user.is_authenticated:
+        user = UserProfile.objects.select_related().get(user=request.user)
+        logger.info(f"user {user.username}(pk = {user.pk}) logged out")
         logout(request)
     return redirect('signin')
 
@@ -150,6 +175,7 @@ class ProfileView(LoginRequiredRedirectMixin, View):
         form = SetNewPassword(user=cur_user.user, data=request.POST)
         if form.is_valid():
             form.save()
+            logger.info(f"{cur_user.user.username}(pk = {cur_user.pk}) changed his password")
             return redirect('profile')
         return redirect('profile')
 
@@ -180,6 +206,7 @@ class ChangeProfileDataView(LoginRequiredRedirectMixin, View):
             cur_user.user.username = user_data_change_form.cleaned_data.get('username')
             cur_user.user.save()
             cur_user.save()
+            logger.info(f"{cur_user.user.username}(pk = {cur_user.pk}) changed his profile data")
         return redirect('profile')
 
 

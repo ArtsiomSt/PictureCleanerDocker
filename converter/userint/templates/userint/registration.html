@@ -6,6 +6,9 @@ Sing Up
 {% endblock %}
 
 {% block content %}
+{% if message %}
+<h3>{{ message }}</h3>
+{% endif %}
 <form action="" method="post">
     {% csrf_token %}
     {{ form.as_p }}

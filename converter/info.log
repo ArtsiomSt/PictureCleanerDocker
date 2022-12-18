@@ -1,0 +1,14 @@
+2022-12-18 10:42:52,123 - INFO - views - views.py - admin_4 has made a request for picture scanning
+2022-12-18 10:42:52,132 - ERROR - views - views.py - Error while sending request for scanner api
+2022-12-18 11:12:05,653 - INFO - views - views.py - admin(pk = 4) has made a request for picture scanning
+2022-12-18 11:12:05,662 - ERROR - views - views.py - Error while sending request for scanner api
+2022-12-18 11:12:32,371 - INFO - views - views.py - user admin logged in succesfully
+2022-12-18 11:12:51,065 - INFO - views - views.py - user admin access denied
+2022-12-18 11:18:14,546 - INFO - views - views.py - user admin logged in succesfully
+2022-12-18 11:18:31,869 - INFO - views - views.py - user admin access denied
+2022-12-18 11:18:35,424 - INFO - views - views.py - user admin logged in succesfully
+2022-12-18 11:24:47,673 - INFO - views - views.py - created new user newuser(pk = 6)
+2022-12-18 11:25:02,870 - INFO - views - views.py - user newuser logged in succesfully
+2022-12-18 11:27:06,077 - INFO - views - views.py - user newuser(pk = 6)
+2022-12-18 11:38:15,992 - INFO - views - views.py - user admin logged in succesfully
+2022-12-18 11:38:30,059 - INFO - views - views.py - admin(pk = 4) changed his profile data
