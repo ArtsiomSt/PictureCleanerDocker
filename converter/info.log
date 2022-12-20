@@ -12,3 +12,27 @@
 2022-12-18 11:27:06,077 - INFO - views - views.py - user newuser(pk = 6)
 2022-12-18 11:38:15,992 - INFO - views - views.py - user admin logged in succesfully
 2022-12-18 11:38:30,059 - INFO - views - views.py - admin(pk = 4) changed his profile data
+2022-12-18 15:49:32,393 - INFO - views - views.py - admin(pk = 4) has made a request for picture scanning
+2022-12-18 15:49:33,849 - INFO - views - views.py - admin(pk = 4) has successfully received a response
+2022-12-18 15:54:36,918 - INFO - views - views.py - admin(pk = 4) has made a request for picture scanning
+2022-12-18 15:54:38,163 - INFO - views - views.py - admin(pk = 4) has successfully received a response
+2022-12-18 15:58:39,176 - INFO - views - views.py - admin(pk = 4) has made a request for picture scanning
+2022-12-18 15:58:40,419 - INFO - views - views.py - admin(pk = 4) has successfully received a response
+2022-12-18 16:00:41,811 - INFO - views - views.py - user admin(pk = 4) has dawnloaded file <48_img_co>
+2022-12-18 16:02:32,757 - INFO - views - views.py - admin(pk = 4) has made a request for picture scanning
+2022-12-18 16:02:34,009 - INFO - views - views.py - admin(pk = 4) has successfully received a response
+2022-12-18 16:03:00,186 - INFO - views - views.py - admin(pk = 4) has made a request for picture scanning
+2022-12-18 16:03:01,435 - INFO - views - views.py - admin(pk = 4) has successfully received a response
+2022-12-20 15:38:09,254 - INFO - views - views.py - admin(pk = 4) has made a request for picture scanning
+2022-12-20 15:38:10,993 - INFO - views - views.py - admin(pk = 4) has successfully received a response
+2022-12-20 15:38:12,161 - INFO - views - views.py - user admin(pk = 4) has downloaded file <51_img_co>
+2022-12-20 15:59:12,621 - INFO - views - views.py - admin(pk = 4) has made a request for picture scanning
+2022-12-20 15:59:13,887 - INFO - views - views.py - admin(pk = 4) has successfully received a response
+2022-12-20 16:00:26,618 - INFO - views - views.py - user admin(pk = 4) has downloaded file <52_img_co>
+2022-12-20 16:00:55,879 - INFO - views - views.py - user admin(pk = 4) has downloaded file <52_img_co>
+2022-12-20 16:02:15,053 - INFO - views - views.py - user admin(pk = 4) has downloaded file <52_img_co>
+2022-12-20 16:02:51,636 - INFO - views - views.py - user admin(pk = 4) has downloaded file <52_img_co>
+2022-12-20 16:03:02,941 - INFO - views - views.py - user admin(pk = 4) has downloaded file <52_img_co>
+2022-12-20 16:10:47,174 - INFO - views - views.py - user admin(pk = 4) has downloaded file <52_img_co>
+2022-12-20 16:26:03,325 - INFO - views - views.py - user admin(pk = 4) has downloaded file <52_pdf_co>
+2022-12-20 16:27:26,561 - INFO - views - views.py - user admin(pk = 4) has downloaded file <52_pdf_co>

@@ -2,7 +2,8 @@ import os
 import mimetypes
 from django.contrib.auth import authenticate, login, logout
 from django.core.files import File
-from django.http import HttpResponse
+from django.db.models import F
+from django.http import HttpResponse, Http404
 from django.shortcuts import render, redirect
 from django.views import View
 from .mixins import LoginRequiredRedirectMixin
@@ -80,13 +81,17 @@ class HomePageView(LoginRequiredRedirectMixin, View):
                 autoencoded_image_file = File(buffer, 'image.png')
                 current_picture.autoencoded_image = autoencoded_image_file
 
+            current_picture.proccesed = True
             current_picture.save()
+            UserProfile.objects.filter(pk=current_user.pk).update(amount_of_operations=F('amount_of_operations')+1)
             logger.info(f"{current_user.user.username}(pk = {current_user.pk}) has successfully received a response")
             context = {
                 'title': 'Homepage',
                 'current_picture': current_picture,
                 'opencvimage_code': f'{current_picture.pk}_img_co',
                 'autoencoded_code': f'{current_picture.pk}_img_ca',
+                'opencvimage_code_pdf': f'{current_picture.pk}_pdf_co',
+                'autoencoded_code_pdf': f'{current_picture.pk}_pdf_ca'
             }
             return render(request, 'userint/homepage.html', context=context)
         return redirect('/?message=Error')
@@ -223,17 +228,18 @@ def download_pdf(request):
     return response
 
 
-def download_file(request, filecode):  # filecode = str, where first value is id of image and the second value is file type
-    file_stats = filecode.split('_')
-    if len(file_stats) not in [2,3]:
-        print('1')
+def download_file(request, filecode):  # filecode = str, where first value is id of image and the second value is file type,
+    file_stats = filecode.split('_')   # the third is type of the image (co = cleaned by opencv, ca = cleaned by autoencoder)
+    if len(file_stats) not in [2, 3]:
         return redirect('home')
-    print(file_stats)
-    if not (file_stats[0].isdigit() and file_stats[1] in ['img']):
-        print('2')
+    if not (file_stats[0].isdigit() and file_stats[1] in ['img', 'pdf']):
         return redirect('home')
-    user = UserProfile.objects.get(user=request.user)
-    image_for_download = user.pictureforrecongition_set.get(pk=int(file_stats[0]))
+    try:
+        user = UserProfile.objects.get(user=request.user)
+        image_for_download = user.pictureforrecongition_set.get(pk=int(file_stats[0]))
+    except:
+        raise Http404
+
     if file_stats[1] == 'img':
         filename = 'img.png'
         if file_stats[2] == 'co':
@@ -241,9 +247,17 @@ def download_file(request, filecode):  # filecode = str, where first value is id
         elif file_stats[2] == 'ca':
             filepath = image_for_download.autoencoded_image.url[1:]
         else:
-            print('3')
             return redirect('home')
-    print(filepath)
+
+    if file_stats[1] == 'pdf':
+        filename = 'pdf_text.pdf'
+        if file_stats[2] == 'co':
+            filepath = image_for_download.create_pdf(opencv_version=True)
+        elif file_stats[2] == 'ca':
+            filepath = image_for_download.create_pdf()
+        else:
+            return redirect('home')
+
     with open(filepath, 'rb') as path:
         try:
             mime_type, _ = mimetypes.guess_type(filepath)
@@ -251,4 +265,8 @@ def download_file(request, filecode):  # filecode = str, where first value is id
             response['Content-Disposition'] = "attachment; filename=%s" % filename
         except:
             return HttpResponse('Error while downloading file')
+
+    if file_stats[1] == 'pdf':
+        os.remove(filepath)
+    logger.info(f'user {user.user.username}(pk = {user.pk}) has downloaded file <{filecode}>')
     return response
