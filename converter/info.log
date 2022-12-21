@@ -36,3 +36,17 @@
 2022-12-20 16:10:47,174 - INFO - views - views.py - user admin(pk = 4) has downloaded file <52_img_co>
 2022-12-20 16:26:03,325 - INFO - views - views.py - user admin(pk = 4) has downloaded file <52_pdf_co>
 2022-12-20 16:27:26,561 - INFO - views - views.py - user admin(pk = 4) has downloaded file <52_pdf_co>
+2022-12-20 16:35:24,788 - INFO - views - views.py - admin(pk = 4) has made a request for picture scanning
+2022-12-20 16:35:26,119 - INFO - views - views.py - admin(pk = 4) has successfully received a response
+2022-12-20 16:35:30,934 - INFO - views - views.py - user admin(pk = 4) has downloaded file <53_pdf_ca>
+2022-12-20 16:35:36,940 - INFO - views - views.py - user admin(pk = 4) has downloaded file <53_pdf_co>
+2022-12-20 17:56:32,615 - INFO - views - views.py - admin(pk = 4) has made a request for picture scanning
+2022-12-20 17:56:33,944 - INFO - views - views.py - admin(pk = 4) has successfully received a response
+2022-12-20 17:56:35,609 - INFO - views - views.py - user admin(pk = 4) has downloaded file <54_img_co>
+2022-12-20 18:13:48,227 - INFO - views - views.py - user admin(pk = 4) has downloaded file <54_pdf_co>
+2022-12-20 18:15:35,641 - INFO - views - views.py - user admin(pk = 4) has downloaded file <54_pdf_co>
+2022-12-20 18:16:31,915 - INFO - views - views.py - user admin(pk = 4) has downloaded file <54_pdf_co>
+2022-12-20 18:18:21,358 - INFO - views - views.py - user admin(pk = 4) has downloaded file <54_json_all>
+2022-12-20 18:20:09,445 - INFO - views - views.py - admin(pk = 4) has made a request for picture scanning
+2022-12-20 18:20:10,734 - INFO - views - views.py - admin(pk = 4) has successfully received a response
+2022-12-20 18:20:13,094 - INFO - views - views.py - user admin(pk = 4) has downloaded file <55_json_all>

@@ -91,7 +91,8 @@ class HomePageView(LoginRequiredRedirectMixin, View):
                 'opencvimage_code': f'{current_picture.pk}_img_co',
                 'autoencoded_code': f'{current_picture.pk}_img_ca',
                 'opencvimage_code_pdf': f'{current_picture.pk}_pdf_co',
-                'autoencoded_code_pdf': f'{current_picture.pk}_pdf_ca'
+                'autoencoded_code_pdf': f'{current_picture.pk}_pdf_ca',
+                'json_file_code': f'{current_picture.pk}_json_all'
             }
             return render(request, 'userint/homepage.html', context=context)
         return redirect('/?message=Error')
@@ -232,7 +233,7 @@ def download_file(request, filecode):  # filecode = str, where first value is id
     file_stats = filecode.split('_')   # the third is type of the image (co = cleaned by opencv, ca = cleaned by autoencoder)
     if len(file_stats) not in [2, 3]:
         return redirect('home')
-    if not (file_stats[0].isdigit() and file_stats[1] in ['img', 'pdf']):
+    if not (file_stats[0].isdigit() and file_stats[1] in ['img', 'pdf', 'json']):
         return redirect('home')
     try:
         user = UserProfile.objects.get(user=request.user)
@@ -258,6 +259,10 @@ def download_file(request, filecode):  # filecode = str, where first value is id
         else:
             return redirect('home')
 
+    if file_stats[1] == 'json':
+        filename = 'json_file.json'
+        filepath = image_for_download.create_json()
+    #image_for_download.create_json()
     with open(filepath, 'rb') as path:
         try:
             mime_type, _ = mimetypes.guess_type(filepath)
@@ -266,7 +271,7 @@ def download_file(request, filecode):  # filecode = str, where first value is id
         except:
             return HttpResponse('Error while downloading file')
 
-    if file_stats[1] == 'pdf':
+    if file_stats[1] == 'pdf' or file_stats[1] == 'json':
         os.remove(filepath)
     logger.info(f'user {user.user.username}(pk = {user.pk}) has downloaded file <{filecode}>')
     return response

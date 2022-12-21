@@ -1,9 +1,12 @@
+import json
+
 from django.contrib.auth.models import User
 from django.core.files import File
 from django.db import models
 import os
 from fpdf import FPDF
 from PIL import Image
+import base64
 
 
 class UserProfile(models.Model):
@@ -22,7 +25,6 @@ class PictureForRecongition(models.Model):
     rectangled_image = models.ImageField(upload_to='rectangled/%Y/%m/%d', null=True, blank=True, max_length=300)
     cleaned_opencv_image = models.ImageField(upload_to='cleaned/%Y/%m/%d', null=True, blank=True)
     autoencoded_image = models.ImageField(upload_to='autoencoded/%Y', null=True, blank=True)
-
 
     def create_pdf(self, opencv_version=False):
         if not self.proccesed:
@@ -44,7 +46,7 @@ class PictureForRecongition(models.Model):
             pdf.cell(200, 10, line, align='L')
             pdf.ln(7)
             height_for_image += 10
-        if height_for_image > 2*pdf.eph/3:
+        if height_for_image > 2 * pdf.eph / 3:
             x_cord_image = 0
             pdf.add_page()
             y_cord_image = 10
@@ -55,3 +57,32 @@ class PictureForRecongition(models.Model):
         filename = f'pdf_{self.pk}_co.pdf' if opencv_version else f'pdf_{self.pk}_ca.pdf'
         pdf.output(os.path.join(current_path, filename))
         return os.path.join(current_path, filename)
+
+    def create_json(self):
+        if not self.proccesed:
+            return
+        exit_dict = {}
+        exit_dict['text_from_image'] = self.recognised_text
+        if self.cleaned_opencv_image:
+            try:
+                cleaned_encode = open(self.cleaned_opencv_image.url[1:], 'rb').read()
+                exit_dict['cleaned_opencv_image'] = str(base64.b64encode(cleaned_encode))
+            except:
+                pass
+        if self.autoencoded_image:
+            try:
+                autoencode_encode = open(self.autoencoded_image.url[1:], 'rb').read()
+                exit_dict['autoencoded_image'] = str(base64.b64encode(autoencode_encode))
+            except:
+                pass
+        if self.picture_file:
+            try:
+                picture_file_encode = open(self.picture_file.url[1:], 'rb').read()
+                exit_dict['picture_file'] = str(base64.b64encode(picture_file_encode))
+            except:
+                pass
+        filename = f'{self.pk}_json_all.json'
+        tempfile_dir = 'tempfiles'
+        with open(os.path.join(tempfile_dir, filename), 'w') as file:
+            json.dump(exit_dict, file, indent=2, ensure_ascii=False)
+        return os.path.join(tempfile_dir, filename)
