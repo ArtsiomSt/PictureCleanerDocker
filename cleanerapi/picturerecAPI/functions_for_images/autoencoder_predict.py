@@ -7,7 +7,7 @@ from copy import deepcopy
 autoencoder = load_model('autoencoder_mnist_2.h5')
 
 
-def get_autoencoded_image(img):
+def get_autoencoded_image(img, queue=None):
     img_copy = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
     shape = img_copy.shape
     img_copy = cv2.resize(img_copy, (512,512))
@@ -18,4 +18,6 @@ def get_autoencoded_image(img):
     res = np.squeeze(res)
     res = res*255
     res = cv2.resize(res, (shape[1], shape[0]))
+#    if queue is not None:
+#        queue.put({'get_autoencoded_image': res})
     return res
