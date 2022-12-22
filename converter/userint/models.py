@@ -20,6 +20,7 @@ class UserProfile(models.Model):
 
 class PictureForRecongition(models.Model):
     made_by_user = models.ForeignKey('UserProfile', on_delete=models.CASCADE)
+    should_be_deleted = models.BooleanField(default=False)
     picture_file = models.ImageField(upload_to='photos/%Y/%m/%d')
     recognised_text = models.TextField(blank=True, null=True, default='')
     proccesed = models.BooleanField(default=False)
@@ -44,7 +45,7 @@ class PictureForRecongition(models.Model):
         pdf.oversized_images = "DOWNSCALE"
         height_for_image = 10
         for line in text_lines:
-            pdf.cell(200, 10, line, align='L')
+            pdf.cell(200, 10, line.replace("‘", ""), align='L')
             pdf.ln(7)
             height_for_image += 10
         if height_for_image > 2 * pdf.eph / 3:

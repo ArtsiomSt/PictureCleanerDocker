@@ -38,12 +38,14 @@ class HomePageView(LoginRequiredRedirectMixin, View):
     def post(self, request):
         form = AddPictureForRecogintionForm(request.POST, request.FILES)
         if form.is_valid():
+            print(form.cleaned_data)
             current_user = UserProfile.objects.select_related().get(user=request.user)
             logger.info(f"{current_user.user.username}(pk = {current_user.pk}) has made a request for picture scanning")
             current_picture = PictureForRecongition.objects.create(
                 made_by_user=current_user,
-                picture_file=form.cleaned_data['picture_file'])
-
+                picture_file=form.cleaned_data['picture_file'],
+                should_be_deleted=form.cleaned_data['save_or_not'],
+            )
             media = current_picture.picture_file.url[1:]
             url = "http://0.0.0.0:4000/recpicture/api/v1/recognise/"
             try:
@@ -171,6 +173,11 @@ class RegisterView(View):
 def logout_user(request):
     if request.user.is_authenticated:
         user = UserProfile.objects.select_related().get(user=request.user)
+        for image in user.pictureforrecongition_set.filter(should_be_deleted=True):
+            image.picture_file.delete(save=False)
+            image.cleaned_opencv_image.delete(save=False)
+            image.autoencoded_image.delete(save=False)
+            image.delete()
         logger.info(f"user {user.user.username}(pk = {user.pk}) logged out")
         logout(request)
     return redirect('signin')
