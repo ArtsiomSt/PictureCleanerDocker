@@ -6,14 +6,14 @@ from .models import PictureForRecongition
 
 
 class LoginForm(forms.Form):
-    username = forms.CharField(max_length=50, label='Username')
-    password = forms.CharField(max_length=100, widget=forms.PasswordInput(), label='Password')
+    username = forms.CharField(max_length=50, label='Username', widget=forms.TextInput(attrs={"class": "form-control"}))
+    password = forms.CharField(max_length=100, widget=forms.PasswordInput(attrs={"class": "form-control"}), label='Password')
 
 
 class RegisterForm(UserCreationForm):
-    username = forms.CharField(max_length=50)
-    password1 = forms.CharField(max_length=100, widget=forms.PasswordInput(), label='Password')
-    password2 = forms.CharField(max_length=100, widget=forms.PasswordInput(), label='Repeat password')
+    username = forms.CharField(max_length=50, widget=forms.TextInput(attrs={"class": "form-control"}))
+    password1 = forms.CharField(max_length=100, widget=forms.PasswordInput(attrs={"class": "form-control"}), label='Password')
+    password2 = forms.CharField(max_length=100, widget=forms.PasswordInput(attrs={"class": "form-control"}), label='Repeat password')
 
 
 class ChangeUserProfileDataForm(forms.Form):
@@ -28,5 +28,5 @@ class SetNewPassword(SetPasswordForm):
 
 
 class AddPictureForRecogintionForm(forms.Form):
-    save_or_not = forms.BooleanField(label="Press here and we wont save your photo", required=False)
+    save_or_not = forms.BooleanField(label="Press here and we will delete your photo after sing out", required=False)
     picture_file = forms.ImageField()

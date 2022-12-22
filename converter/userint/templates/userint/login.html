@@ -7,12 +7,30 @@ Sing In
 
 {% block content %}
 {% if message %}
-<h3>{{ message }}</h3>
+<p class="text-center">{{ message }}</p>
 {% endif %}
-<form action="" method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Sign in</button>
-</form>
-<h5>Don't have an account on our project? <a href="{% url 'signup' %}"><button>Sign up</button></a></h5>
+<div class="grid">
+    <form method="POST" novalidate>
+        {% csrf_token %}
+        <div>
+        {% for field in form %}
+        <div class="form-group">
+            <div class="form-label">{{field.label_tag}}</div>
+            <div>{{field}}</div>
+            {% if field.errors%}
+            {% for error in field.errors %}
+            <div class="alert alert-danger">
+                {{error}}
+            </div>
+            {% endfor %}
+            {% endif %}
+        </div>
+        {% endfor %}
+        </div>
+        <br>
+        <button class="btn btn-primary">Sign in</button>
+        <br>
+    </form>
+</div>
+<p class="text-center">Don't have an account on our project? <a href="{% url 'signup' %}"><button class="btn btn-info">Sign up</button></a></p>
 {% endblock %}

@@ -1,9 +1,10 @@
 import json
-
 from django.contrib.auth.models import User
 from django.core.files import File
 from django.db import models
 import os
+
+from django.urls import reverse
 from fpdf import FPDF
 from PIL import Image
 import base64
@@ -86,3 +87,6 @@ class PictureForRecongition(models.Model):
         with open(os.path.join(tempfile_dir, filename), 'w') as file:
             json.dump(exit_dict, file, indent=2, ensure_ascii=False)
         return os.path.join(tempfile_dir, filename)
+
+    def get_absolute_url(self):
+        return reverse('clnimg', kwargs={"imagepk": self.pk})

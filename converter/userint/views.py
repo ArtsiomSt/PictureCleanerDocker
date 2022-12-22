@@ -21,10 +21,17 @@ logger = logging.getLogger('main')
 
 class HomePageView(LoginRequiredRedirectMixin, View):
     def get(self, request):
+        message = ''
+        if 'message' in request.GET:
+            if request.GET['message'] == 'scanerror':
+                message = "An error has occurred"
+            elif request.GET['message'] == 'fileerror':
+                message = "We have some problems with your file, try to rename it using only latin alphabet"
         form = AddPictureForRecogintionForm()
         context = {
             'form': form,
             'title': 'Homepage',
+            'message': message,
         }
         return render(request, 'userint/homepage.html', context=context)
 
@@ -39,9 +46,12 @@ class HomePageView(LoginRequiredRedirectMixin, View):
 
             media = current_picture.picture_file.url[1:]
             url = "http://0.0.0.0:4000/recpicture/api/v1/recognise/"
-            payload = {}
-            files = [('image', ('recognise.png', open(media, 'rb'), 'image/png'))]
-            headers = {}
+            try:
+                payload = {}
+                files = [('image', ('recognise.png', open(media, 'rb'), 'image/png'))]
+                headers = {}
+            except FileNotFoundError:
+                return redirect('/?message=fileerror')
             try:
                 resp = requests.request("POST", url, headers=headers, data=payload, files=files)
             except:
@@ -85,17 +95,27 @@ class HomePageView(LoginRequiredRedirectMixin, View):
             current_picture.save()
             UserProfile.objects.filter(pk=current_user.pk).update(amount_of_operations=F('amount_of_operations')+1)
             logger.info(f"{current_user.user.username}(pk = {current_user.pk}) has successfully received a response")
-            context = {
-                'title': 'Homepage',
-                'current_picture': current_picture,
-                'opencvimage_code': f'{current_picture.pk}_img_co',
-                'autoencoded_code': f'{current_picture.pk}_img_ca',
-                'opencvimage_code_pdf': f'{current_picture.pk}_pdf_co',
-                'autoencoded_code_pdf': f'{current_picture.pk}_pdf_ca',
-                'json_file_code': f'{current_picture.pk}_json_all'
-            }
-            return render(request, 'userint/homepage.html', context=context)
+            return redirect(current_picture)
         return redirect('/?message=Error')
+
+
+class ProcessedImageView(View):
+    def get(self, request, imagepk):
+        try:
+            user = UserProfile.objects.get(user=request.user)
+            current_picture = user.pictureforrecongition_set.get(pk=imagepk)
+        except:
+            raise Http404
+        context = {
+            'title': 'Homepage',
+            'current_picture': current_picture,
+            'opencvimage_code': f'{current_picture.pk}_img_co',
+            'autoencoded_code': f'{current_picture.pk}_img_ca',
+            'opencvimage_code_pdf': f'{current_picture.pk}_pdf_co',
+            'autoencoded_code_pdf': f'{current_picture.pk}_pdf_ca',
+            'json_file_code': f'{current_picture.pk}_json_all'
+        }
+        return render(request, 'userint/processedimg.html', context)
 
 
 class LoginView(View):
@@ -151,7 +171,7 @@ class RegisterView(View):
 def logout_user(request):
     if request.user.is_authenticated:
         user = UserProfile.objects.select_related().get(user=request.user)
-        logger.info(f"user {user.username}(pk = {user.pk}) logged out")
+        logger.info(f"user {user.user.username}(pk = {user.pk}) logged out")
         logout(request)
     return redirect('signin')
 

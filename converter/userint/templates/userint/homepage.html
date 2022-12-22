@@ -6,12 +6,15 @@
 
 
 {% block content %}
+<p class="text-center">{{ message }}</p>
 {% if form %}
+<div class="grid">
 <form action="" method="post" enctype="multipart/form-data">
     {% csrf_token %}
     {{ form.as_p }}
-    <button type="submit">Recognise</button>
+    <div class="grid"><button type="submit" class="btn btn-primary">Recognise</button></div>
 </form>
+</div>
 {% endif %}
 {% if current_picture %}
 <img src="{{ current_picture.picture_file.url }}" alt="">

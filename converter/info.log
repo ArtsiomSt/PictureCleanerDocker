@@ -50,3 +50,19 @@
 2022-12-20 18:20:09,445 - INFO - views - views.py - admin(pk = 4) has made a request for picture scanning
 2022-12-20 18:20:10,734 - INFO - views - views.py - admin(pk = 4) has successfully received a response
 2022-12-20 18:20:13,094 - INFO - views - views.py - user admin(pk = 4) has downloaded file <55_json_all>
+2022-12-22 08:43:27,351 - INFO - views - views.py - user admin(pk = 4) logged out
+2022-12-22 08:53:22,563 - INFO - views - views.py - user admin logged in succesfully
+2022-12-22 08:53:23,694 - INFO - views - views.py - user admin(pk = 4) logged out
+2022-12-22 09:02:41,904 - INFO - views - views.py - user admin logged in succesfully
+2022-12-22 09:44:21,780 - INFO - views - views.py - admin(pk = 4) has made a request for picture scanning
+2022-12-22 09:44:21,785 - ERROR - views - views.py - Error while sending request for scanner api
+2022-12-22 09:47:18,222 - INFO - views - views.py - admin(pk = 4) has made a request for picture scanning
+2022-12-22 09:52:12,314 - INFO - views - views.py - admin(pk = 4) has made a request for picture scanning
+2022-12-22 09:52:25,730 - INFO - views - views.py - admin(pk = 4) has made a request for picture scanning
+2022-12-22 09:52:25,749 - ERROR - views - views.py - Error while sending request for scanner api
+2022-12-22 10:14:07,901 - INFO - views - views.py - admin(pk = 4) has made a request for picture scanning
+2022-12-22 10:14:09,038 - INFO - views - views.py - admin(pk = 4) has successfully received a response
+2022-12-22 10:22:54,779 - INFO - views - views.py - user admin(pk = 4) has downloaded file <60_pdf_ca>
+2022-12-22 10:24:01,024 - INFO - views - views.py - user admin(pk = 4) has downloaded file <60_pdf_ca>
+2022-12-22 10:24:08,352 - INFO - views - views.py - user admin(pk = 4) has downloaded file <60_img_ca>
+2022-12-22 10:24:16,932 - INFO - views - views.py - user admin(pk = 4) has downloaded file <60_json_all>

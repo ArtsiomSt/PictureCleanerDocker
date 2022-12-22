@@ -5,36 +5,62 @@
 {% endblock %}
 
 {% block content %}
-<table class="table">
-  <thead>
-    <tr>
-      <th scope="col"></th>
-      <th scope="col"></th>
-    </tr>
-  </thead>
-    {% for stat, value in user_data.items %}
-  <tbody>
-    {% if stat == 'Password' %}
-    <tr>
-      <td scope="col">{{ stat }}</td>
-      <td scope="col">{{ value }} &nbsp;&nbsp;&nbsp;&nbsp; <a href="/profile/?chps=true">Change Password</a></td>
-    </tr>
-    {% else %}
-    <tr>
-      <td scope="col">{{ stat }}</td>
-      <td scope="col">{{ value }}</td>
-    </tr>
-    {% endif %}
-  </tbody>
-    {% endfor %}
-</table>
+<div class="grid">
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col"></th>
+            <th scope="col"></th>
+        </tr>
+        </thead>
+        {% for stat, value in user_data.items %}
+        <tbody>
+        {% if stat == 'Password' %}
+        <tr>
+            <td scope="col">{{ stat }}</td>
+            <td scope="col">{{ value }} &nbsp;&nbsp;&nbsp;&nbsp; <a href="/profile/?chps=true">Change Password</a></td>
+        </tr>
+        {% else %}
+        <tr>
+            <td scope="col">{{ stat }}</td>
+            <td scope="col">{{ value }}</td>
+        </tr>
+        {% endif %}
+        </tbody>
+        {% endfor %}
+    </table>
+</div>
 {% if form %}
-<form action="" method="post">
-  {% csrf_token %}
-  {{ form.as_p }}
-  <button type="submit">Save Password</button>
-</form>
+<div class="leftsm">
+    <form method="POST" novalidate>
+        {% csrf_token %}
+        <div>
+            {% for field in form %}
+            <div class="form-group">
+                <div class="form-label">{{field.label_tag}}</div>
+                <div>{{field}}</div>
+                {% if field.errors%}
+                {% for error in field.errors %}
+                <div class="alert alert-danger">
+                    {{error}}
+                </div>
+                {% endfor %}
+                {% endif %}
+            </div>
+            {% endfor %}
+        </div>
+        <span class="helptext"><ul>
+          <li>Your password must contain at least 8 characters.</li>
+          <li>Your password can’t be a commonly used password.</li>
+          <li>Your password can’t be entirely numeric.</li>
+        </ul></span>
+        <button class="btn btn-primary">Save password</button>
+        <br>
+    </form>
+</div>
 {% endif %}
 <hr>
-<a href="{% url 'changep' %}"><button>Change Profile Data</button></a>
+<a href="{% url 'changep' %}">
+    <button class="btn btn-secondary">Change Profile Data</button>
+</a>
 {% endblock %}

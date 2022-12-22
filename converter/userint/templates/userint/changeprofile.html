@@ -5,9 +5,27 @@
 {% endblock %}
 
 {% block content %}
-<form action="" method="post">
-    {% csrf_token %}
-    {{ change_form.as_p }}
-    <button type="submit" >Change</button>
-</form>
+<div class="grid">
+    <form method="POST" novalidate>
+        {% csrf_token %}
+        <div>
+        {% for field in change_form %}
+        <div class="form-group">
+            <div class="form-label">{{field.label_tag}}</div>
+            <div>{{field}}</div>
+            {% if field.errors%}
+            {% for error in field.errors %}
+            <div class="alert alert-danger">
+                {{error}}
+            </div>
+            {% endfor %}
+            {% endif %}
+        </div>
+        {% endfor %}
+        </div>
+        <br>
+        <button class="btn btn-primary">Change</button>
+        <br>
+    </form>
+</div>
 {% endblock %}

@@ -13,6 +13,7 @@ urlpatterns = [
     path('changeprofile/', ChangeProfileDataView.as_view(), name='changep'),
     path('dowload/imgtest/', download_pdf, name='dtest'),
     path('download/<str:filecode>', download_file, name='download'),
+    path('prcsdimg/<int:imagepk>', ProcessedImageView.as_view(), name='clnimg')
 ]
 
 if DEBUG:
