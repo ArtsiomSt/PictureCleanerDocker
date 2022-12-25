@@ -10,10 +10,10 @@ from .mixins import LoginRequiredRedirectMixin
 from .forms import LoginForm, RegisterForm, ChangeUserProfileDataForm, SetNewPassword, AddPictureForRecogintionForm
 from .models import UserProfile, PictureForRecongition
 import requests
-from converter.settings import BASE_DIR, MEDIA_ROOT
 import base64
 import logging
 import io
+import random
 
 
 logger = logging.getLogger('main')
@@ -122,14 +122,9 @@ class ProcessedImageView(View):
 
 class LoginView(View):
     def get(self, request):
-        message = ''
-        if 'message' in request.GET:
-            if request.GET['message'] == 'InvalidData':
-                message = "Could not sing in with those credentials"
         form = LoginForm()
         context = {
             'form': form,
-            'message': message,
         }
         return render(request, 'userint/login.html', context)
 
@@ -144,19 +139,15 @@ class LoginView(View):
                 return redirect('home')
             except:
                 logger.info(f"user {cleaned_data['username']} access denied")
-        return redirect('/signin/?message=InvalidData')
+        message = "Could not sign in with those credentials"
+        return render(request, 'userint/login.html', {'form': form, 'message': message})
 
 
 class RegisterView(View):
     def get(self, request):
-        message = ''
-        if 'message' in request.GET:
-            if request.GET['message'] == 'InvalidData':
-                message = "Could not sing up with those credentials"
         form = RegisterForm()
         context = {
             'form': form,
-            'message': message,
         }
         return render(request, 'userint/registration.html', context)
 
@@ -167,7 +158,8 @@ class RegisterView(View):
             UserProfile.objects.create(user=user)
             logger.info(f"created new user {user.username}(pk = {user.pk})")
             return redirect('/signin/?message=Success')
-        return redirect('/signup/?message=InvalidData')
+        return render(request, 'userint/registration.html', {'form': form})
+
 
 
 def logout_user(request):
@@ -185,7 +177,6 @@ def logout_user(request):
 
 class ProfileView(LoginRequiredRedirectMixin, View):
     def get(self, request):
-        import random
         cur_user = UserProfile.objects.select_related().get(user=request.user)
         form = SetNewPassword(cur_user.user)
         user_data = {
@@ -210,7 +201,19 @@ class ProfileView(LoginRequiredRedirectMixin, View):
             form.save()
             logger.info(f"{cur_user.user.username}(pk = {cur_user.pk}) changed his password")
             return redirect('profile')
-        return redirect('profile')
+        user_data = {
+            'Username': cur_user.user.username,
+            'First name': cur_user.user.first_name if cur_user.user.first_name else 'Empty',
+            'Last name': cur_user.user.last_name if cur_user.user.first_name else 'Empty',
+            'Email': cur_user.user.email if cur_user.user.first_name else 'Empty',
+            'Password': ''.join(['*' for x in range(0, random.randrange(5, 10))])
+        }
+        context = {
+            'user_data': user_data,
+            'title': 'Profile',
+            'form': form
+        }
+        return render(request, 'userint/profile.html', context)
 
 
 class ChangeProfileDataView(LoginRequiredRedirectMixin, View):
@@ -241,19 +244,6 @@ class ChangeProfileDataView(LoginRequiredRedirectMixin, View):
             cur_user.save()
             logger.info(f"{cur_user.user.username}(pk = {cur_user.pk}) changed his profile data")
         return redirect('profile')
-
-
-def download_pdf(request):
-    filename = 'img.png'
-    filepath = os.path.join(MEDIA_ROOT, filename)
-    with open(filepath, 'rb') as path:
-        try:
-            mime_type, _ = mimetypes.guess_type(filepath)
-            response = HttpResponse(path, content_type=mime_type)
-            response['Content-Disposition'] = "attachment; filename=%s" % filename
-        except:
-            return HttpResponse('Error while downloading file')
-    return response
 
 
 def download_file(request, filecode):  # filecode = str, where first value is id of image and the second value is file type,

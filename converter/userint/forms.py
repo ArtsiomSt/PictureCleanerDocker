@@ -28,5 +28,5 @@ class SetNewPassword(SetPasswordForm):
 
 
 class AddPictureForRecogintionForm(forms.Form):
-    save_or_not = forms.BooleanField(label="Press here and we will delete your photo after sing out", required=False)
+    save_or_not = forms.BooleanField(label="Press here and we will delete your photo after sign out", required=False)
     picture_file = forms.ImageField()

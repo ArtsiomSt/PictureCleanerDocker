@@ -41,11 +41,13 @@ class PictureForRecongition(models.Model):
         text_lines = self.recognised_text.split(sep='\n')
         pdf = FPDF()
         pdf.add_page()
-        pdf.set_font('helvetica', 'B', size=14)
+        print(os.listdir())
+        pdf.add_font('DejaVu', '', 'fonts/DejaVuSans.ttf', uni=True)
+        pdf.set_font('DejaVu', size=14)
         pdf.oversized_images = "DOWNSCALE"
         height_for_image = 10
         for line in text_lines:
-            pdf.cell(200, 10, line.replace("‘", ""), align='L')
+            pdf.cell(200, 10, line, align='L')
             pdf.ln(7)
             height_for_image += 10
         if height_for_image > 2 * pdf.eph / 3:

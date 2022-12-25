@@ -11,7 +11,6 @@ urlpatterns = [
     path('logout/', logout_user, name='logout'),
     path('profile/', ProfileView.as_view(), name='profile'),
     path('changeprofile/', ChangeProfileDataView.as_view(), name='changep'),
-    path('dowload/imgtest/', download_pdf, name='dtest'),
     path('download/<str:filecode>', download_file, name='download'),
     path('prcsdimg/<int:imagepk>', ProcessedImageView.as_view(), name='clnimg')
 ]

@@ -93,3 +93,60 @@
 2022-12-22 12:19:49,824 - INFO - views - views.py - admin(pk = 4) has made a request for picture scanning
 2022-12-22 12:19:51,137 - INFO - views - views.py - admin(pk = 4) has successfully received a response
 2022-12-22 12:19:53,213 - INFO - views - views.py - user admin(pk = 4) has downloaded file <68_pdf_co>
+2022-12-22 17:09:30,466 - INFO - views - views.py - admin(pk = 4) has made a request for picture scanning
+2022-12-22 17:09:31,772 - INFO - views - views.py - admin(pk = 4) has successfully received a response
+2022-12-22 17:09:34,654 - INFO - views - views.py - user admin(pk = 4) has downloaded file <69_pdf_co>
+2022-12-22 17:10:07,902 - INFO - views - views.py - admin(pk = 4) has made a request for picture scanning
+2022-12-22 17:10:09,117 - INFO - views - views.py - admin(pk = 4) has successfully received a response
+2022-12-22 17:10:11,757 - INFO - views - views.py - user admin(pk = 4) has downloaded file <70_pdf_co>
+2022-12-24 13:32:09,760 - INFO - views - views.py - user admin(pk = 4) logged out
+2022-12-24 13:32:13,346 - INFO - views - views.py - user admin logged in succesfully
+2022-12-24 13:32:22,549 - INFO - views - views.py - admin(pk = 4) has made a request for picture scanning
+2022-12-24 13:32:24,167 - INFO - views - views.py - admin(pk = 4) has successfully received a response
+2022-12-24 13:32:39,371 - INFO - views - views.py - user admin(pk = 4) has downloaded file <71_pdf_ca>
+2022-12-24 14:25:29,157 - INFO - views - views.py - user admin(pk = 4) logged out
+2022-12-24 14:25:35,625 - INFO - views - views.py - user admin logged in succesfully
+2022-12-24 14:25:41,106 - INFO - views - views.py - admin(pk = 4) has made a request for picture scanning
+2022-12-24 14:25:42,389 - INFO - views - views.py - admin(pk = 4) has successfully received a response
+2022-12-24 14:25:52,945 - INFO - views - views.py - user admin(pk = 4) has downloaded file <72_pdf_co>
+2022-12-24 14:25:57,274 - INFO - views - views.py - user admin(pk = 4) has downloaded file <72_img_ca>
+2022-12-25 08:39:11,972 - INFO - views - views.py - admin(pk = 4) has made a request for picture scanning
+2022-12-25 08:39:13,614 - INFO - views - views.py - admin(pk = 4) has successfully received a response
+2022-12-25 08:39:42,018 - INFO - views - views.py - admin(pk = 4) has made a request for picture scanning
+2022-12-25 08:39:43,166 - INFO - views - views.py - admin(pk = 4) has successfully received a response
+2022-12-25 08:40:06,782 - INFO - views - views.py - admin(pk = 4) has made a request for picture scanning
+2022-12-25 08:40:07,947 - INFO - views - views.py - admin(pk = 4) has successfully received a response
+2022-12-25 08:42:04,551 - INFO - views - views.py - admin(pk = 4) changed his profile data
+2022-12-25 08:42:26,403 - INFO - views - views.py - user admin(pk = 4) logged out
+2022-12-25 08:42:52,474 - INFO - views - views.py - user admin logged in succesfully
+2022-12-25 08:50:36,529 - INFO - views - views.py - admin(pk = 4) has made a request for picture scanning
+2022-12-25 08:50:37,143 - INFO - views - views.py - admin(pk = 4) has successfully received a response
+2022-12-25 08:51:59,238 - INFO - views - views.py - admin(pk = 4) has made a request for picture scanning
+2022-12-25 08:51:59,865 - INFO - views - views.py - admin(pk = 4) has successfully received a response
+2022-12-25 08:52:35,263 - INFO - views - views.py - admin(pk = 4) has made a request for picture scanning
+2022-12-25 08:52:36,499 - INFO - views - views.py - admin(pk = 4) has successfully received a response
+2022-12-25 14:25:30,660 - INFO - views - views.py - user admin(pk = 4) logged out
+2022-12-25 14:28:02,142 - INFO - views - views.py - created new user admin1(pk = 8)
+2022-12-25 14:51:06,933 - INFO - views - views.py - user admin access denied
+2022-12-25 14:51:21,896 - INFO - views - views.py - user admin access denied
+2022-12-25 14:52:06,892 - INFO - views - views.py - user admin access denied
+2022-12-25 14:52:47,277 - INFO - views - views.py - user admin logged in succesfully
+2022-12-25 14:52:48,203 - INFO - views - views.py - user admin(pk = 4) logged out
+2022-12-25 14:52:50,944 - INFO - views - views.py - user admin access denied
+2022-12-25 14:53:26,163 - INFO - views - views.py - created new user yser(pk = 9)
+2022-12-25 14:53:42,206 - INFO - views - views.py - user yser1 access denied
+2022-12-25 14:53:52,584 - INFO - views - views.py - user yser1 access denied
+2022-12-25 14:54:07,250 - INFO - views - views.py - user yser logged in succesfully
+2022-12-25 14:57:34,477 - INFO - views - views.py - yser(pk = 8) changed his password
+2022-12-25 14:57:48,608 - INFO - views - views.py - user yser logged in succesfully
+2022-12-25 14:57:56,499 - INFO - views - views.py - yser(pk = 8) has made a request for picture scanning
+2022-12-25 14:57:57,746 - INFO - views - views.py - yser(pk = 8) has successfully received a response
+2022-12-25 14:58:17,885 - INFO - views - views.py - yser(pk = 8) has made a request for picture scanning
+2022-12-25 14:58:19,208 - INFO - views - views.py - yser(pk = 8) has successfully received a response
+2022-12-25 15:14:05,674 - INFO - views - views.py - yser(pk = 8) has made a request for picture scanning
+2022-12-25 15:14:06,957 - INFO - views - views.py - yser(pk = 8) has successfully received a response
+2022-12-25 15:14:45,552 - INFO - views - views.py - yser(pk = 8) has made a request for picture scanning
+2022-12-25 15:14:46,897 - INFO - views - views.py - yser(pk = 8) has successfully received a response
+2022-12-25 15:16:34,400 - INFO - views - views.py - yser(pk = 8) has made a request for picture scanning
+2022-12-25 15:16:35,738 - INFO - views - views.py - yser(pk = 8) has successfully received a response
+2022-12-25 15:16:37,820 - INFO - views - views.py - user yser(pk = 8) has downloaded file <83_pdf_co>
