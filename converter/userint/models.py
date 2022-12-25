@@ -3,7 +3,6 @@ from django.contrib.auth.models import User
 from django.core.files import File
 from django.db import models
 import os
-
 from django.urls import reverse
 from fpdf import FPDF
 from PIL import Image

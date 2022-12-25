@@ -67,6 +67,7 @@ class HomePageView(LoginRequiredRedirectMixin, View):
                 autoencoded_image = resp.json().get('autoencoded_img', None)
             except:
                 logger.error(f"Error, received bad answer")
+                return redirect('/?message=error')
 
             if image_code is not None:
                 image_decode = base64.b64decode(image_code)
