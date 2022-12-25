@@ -1,6 +1,6 @@
 # PictureCleanerDocker
 Project for picture denoising
-This project is made out of two part: cleaner part, which can be started using docker and client part, that is build for using cleaner. 
+This project is made out of two part: cleaner parts, which can be started using docker and client part, that is build for using cleaner. 
 Both are built using django framework
 To start using cleaner api with docker you have to follow next tips:
 1) Come to directpry called cleanerapi after cloning project
