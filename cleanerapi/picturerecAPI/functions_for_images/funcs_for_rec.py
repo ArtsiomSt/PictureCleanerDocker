@@ -40,7 +40,7 @@ def get_letters_from_picture(img):
     img_copy = deepcopy(img)
 #    gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 #    thresh = cv2.adaptiveThreshold(gray, 255, cv2.ADAPTIVE_THRESH_MEAN_C, cv2.THRESH_BINARY, 11, 3)
-    thresh = img # !!!!!!!!!!!!!!!!HERE IS THE CHANGE(FOR ME NOT TO LOSE THIS MOMENT)
+    thresh = img # !!!!!!!!!!!!!!!!
     conts, hier = cv2.findContours(thresh, cv2.RETR_CCOMP, cv2.CHAIN_APPROX_SIMPLE)
     biggest = 0
     letters = []

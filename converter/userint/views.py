@@ -38,7 +38,6 @@ class HomePageView(LoginRequiredRedirectMixin, View):
     def post(self, request):
         form = AddPictureForRecogintionForm(request.POST, request.FILES)
         if form.is_valid():
-            print(form.cleaned_data)
             current_user = UserProfile.objects.select_related().get(user=request.user)
             logger.info(f"{current_user.user.username}(pk = {current_user.pk}) has made a request for picture scanning")
             current_picture = PictureForRecongition.objects.create(
@@ -61,10 +60,13 @@ class HomePageView(LoginRequiredRedirectMixin, View):
                 current_picture.picture_file.delete(save=False)
                 current_picture.delete()
                 return redirect('/?message=scanerror')
-            image_code = resp.json().get('new_img', None)
-            cleaned_image_opencv = resp.json().get('cleaned_img', None)
-            text_from_picture = resp.json().get('letters', None)
-            autoencoded_image = resp.json().get('autoencoded_img', None)
+            try:
+                image_code = resp.json().get('new_img', None)
+                cleaned_image_opencv = resp.json().get('cleaned_img', None)
+                text_from_picture = resp.json().get('letters', None)
+                autoencoded_image = resp.json().get('autoencoded_img', None)
+            except:
+                logger.error(f"Error, received bad answer")
 
             if image_code is not None:
                 image_decode = base64.b64decode(image_code)

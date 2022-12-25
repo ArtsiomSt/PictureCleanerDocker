@@ -150,3 +150,30 @@
 2022-12-25 15:16:34,400 - INFO - views - views.py - yser(pk = 8) has made a request for picture scanning
 2022-12-25 15:16:35,738 - INFO - views - views.py - yser(pk = 8) has successfully received a response
 2022-12-25 15:16:37,820 - INFO - views - views.py - user yser(pk = 8) has downloaded file <83_pdf_co>
+2022-12-25 15:21:53,222 - INFO - views - views.py - user yser(pk = 8) logged out
+2022-12-25 15:22:09,348 - INFO - views - views.py - created new user ffffgb(pk = 10)
+2022-12-25 15:22:15,332 - INFO - views - views.py - user ffffgb logged in succesfully
+2022-12-25 15:22:21,201 - INFO - views - views.py - ffffgb(pk = 9) has made a request for picture scanning
+2022-12-25 15:22:22,527 - INFO - views - views.py - ffffgb(pk = 9) has successfully received a response
+2022-12-25 15:22:24,226 - INFO - views - views.py - user ffffgb(pk = 9) has downloaded file <84_img_co>
+2022-12-25 15:22:25,484 - INFO - views - views.py - user ffffgb(pk = 9) has downloaded file <84_pdf_co>
+2022-12-25 15:22:32,181 - INFO - views - views.py - user ffffgb(pk = 9) has downloaded file <84_img_ca>
+2022-12-25 15:22:33,954 - INFO - views - views.py - user ffffgb(pk = 9) has downloaded file <84_pdf_ca>
+2022-12-25 15:22:37,059 - INFO - views - views.py - user ffffgb(pk = 9) has downloaded file <84_json_all>
+2022-12-25 15:22:46,836 - INFO - views - views.py - ffffgb(pk = 9) has made a request for picture scanning
+2022-12-25 15:22:48,129 - INFO - views - views.py - ffffgb(pk = 9) has successfully received a response
+2022-12-25 15:22:50,627 - INFO - views - views.py - user ffffgb(pk = 9) has downloaded file <85_img_ca>
+2022-12-25 15:22:58,431 - INFO - views - views.py - ffffgb(pk = 9) has made a request for picture scanning
+2022-12-25 15:22:59,707 - INFO - views - views.py - ffffgb(pk = 9) has successfully received a response
+2022-12-25 15:23:17,505 - INFO - views - views.py - ffffgb(pk = 9) has made a request for picture scanning
+2022-12-25 15:23:18,823 - INFO - views - views.py - ffffgb(pk = 9) has successfully received a response
+2022-12-25 15:23:34,211 - INFO - views - views.py - ffffgb(pk = 9) changed his profile data
+2022-12-25 15:23:42,407 - INFO - views - views.py - ffffgb(pk = 9) changed his password
+2022-12-25 15:23:48,631 - INFO - views - views.py - user ffffgb logged in succesfully
+2022-12-25 15:23:51,274 - INFO - views - views.py - user ffffgb(pk = 9) logged out
+2022-12-25 15:24:02,397 - INFO - views - views.py - user admin logged in succesfully
+2022-12-25 16:02:09,427 - INFO - views - views.py - admin(pk = 4) has made a request for picture scanning
+2022-12-25 16:03:50,593 - INFO - views - views.py - admin(pk = 4) has made a request for picture scanning
+2022-12-25 16:03:52,028 - INFO - views - views.py - admin(pk = 4) has successfully received a response
+2022-12-25 16:04:17,636 - INFO - views - views.py - admin(pk = 4) has made a request for picture scanning
+2022-12-25 16:04:18,702 - INFO - views - views.py - admin(pk = 4) has successfully received a response
