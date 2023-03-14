@@ -1,0 +1,12 @@
+django==4.1.4
+pillow
+pytesseract
+djangorestframework==3.14.0
+opencv-python==4.5.5.62
+tensorflow==2.9.1
+jinja2
+requests==2.28.1
+fpdf2==2.6.0
+keras==2.11.0
+numpy==1.23.5
+
