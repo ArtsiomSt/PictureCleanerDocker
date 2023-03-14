@@ -1,12 +1,12 @@
 import json
-from django.contrib.auth.models import User
-from django.core.files import File
-from django.db import models
 import os
+import base64
+
+from django.contrib.auth.models import User
+from django.db import models
 from django.urls import reverse
 from fpdf import FPDF
 from PIL import Image
-import base64
 
 
 class UserProfile(models.Model):

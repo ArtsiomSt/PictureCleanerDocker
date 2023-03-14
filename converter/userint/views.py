@@ -1,19 +1,22 @@
 import os
 import mimetypes
+import requests
+import base64
+import logging
+import io
+import random
+
 from django.contrib.auth import authenticate, login, logout
 from django.core.files import File
 from django.db.models import F
 from django.http import HttpResponse, Http404
 from django.shortcuts import render, redirect
 from django.views import View
+
 from .mixins import LoginRequiredRedirectMixin
 from .forms import LoginForm, RegisterForm, ChangeUserProfileDataForm, SetNewPassword, AddPictureForRecogintionForm
 from .models import UserProfile, PictureForRecongition
-import requests
-import base64
-import logging
-import io
-import random
+
 
 
 logger = logging.getLogger('main')

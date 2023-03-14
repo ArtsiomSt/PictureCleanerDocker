@@ -1,7 +1,8 @@
-from keras.models import load_model
 import cv2
 import numpy as np
 from copy import deepcopy
+
+from keras.models import load_model
 
 
 #autoencoder = load_model('autoencoder_mnist_2.h5')

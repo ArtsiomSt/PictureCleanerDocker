@@ -1,6 +1,4 @@
 import io
-import time
-from copy import deepcopy
 import cv2
 import numpy as np
 from django.core.files import File
