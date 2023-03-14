@@ -1,4 +1,6 @@
 # PictureCleanerDocker
+Data Scientist Intership project:
+
 Project for picture denoising
 This project is made out of two part: cleaner parts, which can be started using docker and client part, that is build for using cleaner. 
 Both are built using django framework
